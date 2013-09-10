@@ -31,4 +31,5 @@ DEPENDENCIES
   pg
   rake
   sequel
+  sinatra
   sinatra-contrib
