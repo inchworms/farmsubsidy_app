@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sequel'
+require 'sinatra/reloader' if development?
 
 # connect to an in-memory database
 DB = Sequel.postgres("farmsubsidy_performance")
