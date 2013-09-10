@@ -3,5 +3,5 @@ require 'sinatra'
 require 'sequel'
 
 get '/' do
-  erb :bar
+  erb :top_payment
 end

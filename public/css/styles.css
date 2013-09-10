@@ -1,0 +1,9 @@
+body {    background: #EDEEE8;
+          font-family: Helvetica, Arial, sans-serif;
+}
+
+#container {
+          width: 800px;
+          margin-right: auto;
+          margin-left: auto;
+}
