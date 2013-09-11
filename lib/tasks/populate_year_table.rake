@@ -1,6 +1,6 @@
-namespace :popuate do
+namespace :populate do
   desc "populate year table"
-  task :populate_year_table do
+  task :year_table do
 
     # connect to an in-memory database
     DB = Sequel.postgres("#{@database_name}", :loggers => [Logger.new($stdout)])
