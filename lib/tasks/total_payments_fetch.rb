@@ -6,7 +6,13 @@ require 'logger'
 DB = Sequel.postgres("farmsubsidy_performance_add_top_payments", :loggers => [Logger.new($stdout)])
 
 # connect to the models
-project_root = File.dirname(File.absolute_path(__FILE__))
+
+# __FILE__ is a reference to the current file name
+# absolute_path converts a pathname to an absolute pathname
+# File.dirname gets the directory
+tasks_dir = File.dirname(File.absolute_path(__FILE__))
+# substitudes "lib" and "tasks" to get to the project directory
+project_root = tasks_dir.gsub(/lib\/tasks/,"")
 Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
 # connect to payments total table and add data to the database
