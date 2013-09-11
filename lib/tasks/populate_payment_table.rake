@@ -7,7 +7,7 @@ namespace :populate do
 
     beginning = Time.now
 
-    MAXIMUMROWS = 10000
+    MAXIMUMROWS = 1000000
 
     # create a dataset from the payments table
     payment = DB[:payments]
@@ -27,25 +27,24 @@ namespace :populate do
     recipients = DB[:recipients]
 
     i = 0
-    payment_txt = CSV.open("data/cz_payment.txt", "r:UTF-8", :headers => true, :col_sep => ";") do |csv|
-      csv.each do |row|
-          print "." if i%100 == 0
+    input_file_path = "#{@project_root}/data/cz_payment.txt"
 
-          # find the recipient_id by searching recipient dataset
-          recipient_id = recipients.where(:global_recipient_id=>row['globalRecipientId']).first[:id]
-          year_id      = years_hash[row['year']]
-          # insert data into payments table
-          payment.insert(
-            amount_euro: row['amountEuro'],
-            year_id: year_id,
-            recipient_id: recipient_id
-          )
-        i += 1
-        break if i > MAXIMUMROWS #(check for break in ruby)
-      end
+    CSV.foreach(input_file_path, col_sep: ";", headers: true, encoding: "UTF-8") do |row|
+      print "." if i%100 == 0
+      # find the recipient_id by searching recipient dataset
+      recipient_id = recipients.where(:global_recipient_id=>row['globalRecipientId']).first[:id]
+      year_id      = years_hash[row['year']]
+      # insert data into payments table
+      payment.insert(
+        amount_euro: row['amountEuro'],
+        year_id: year_id,
+        recipient_id: recipient_id
+      )
+      i += 1
+      break if i > MAXIMUMROWS #(check for break in ruby)
     end
 
-    puts "For populating #{MAXIMUMROWS} rows of the payment table the Computer needs #{Time.now - beginning} seconds."
+    puts "For populating #{i} rows of the payment table the Computer needs #{Time.now - beginning} seconds."
   end
 end
 

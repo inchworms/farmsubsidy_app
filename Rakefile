@@ -14,8 +14,25 @@ Dir.glob('lib/tasks/*.rake').each { |r| import r }
 
 # fetch data and write to database
 # these tasks MUST be run in this sequence
-
-# Rake::Task['fetch:year_data_fetch'].invoke
-# Rake::Task['fetch:recipient_data_fetch'].invoke
-# Rake::Task['fetch:payment_data_fetch'].invoke
-# Rake::Task['fetch:total_payments_fetch'].invoke
+desc 'delete and (re-)create db, read data from CSVs into db'
+task 'prepare_data' do
+  
+  user_message  = "This task will delete the db '#{@database_name}' and re-create it."+"\n"
+  user_message += "It will parse the CSV-Files in /data and put the data into the database."+"\n"
+  user_message += "Hit [Enter] if that is OK for you, else hit [Ctrl]+C."+"\n"
+  
+  STDOUT.puts user_message
+  # just wait for any input to stop script execution
+  input = STDIN.gets.chomp
+                                           
+  beginning = Time.now
+  
+  Rake::Task['db:create'].invoke
+  Rake::Task['db:migrate'].invoke
+  Rake::Task['populate:year_table'].invoke
+  Rake::Task['populate:recipient_table'].invoke
+  Rake::Task['populate:payment_table'].invoke
+  Rake::Task['populate:total_payments_table'].invoke
+  
+  puts "Setting up the complete data took: #{Time.now - beginning} seconds."
+end
