@@ -1,0 +1,6 @@
+# create and migrate new database
+namespace :db do 
+  task :migrate do
+  end
+end
+
