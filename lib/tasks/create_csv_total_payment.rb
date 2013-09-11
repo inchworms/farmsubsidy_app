@@ -27,7 +27,7 @@ payments_sorted.each_with_index do |payment, index|
   top_payments << {rank: index+1, name: recipient_name, amount: payment[:amount_euro]}
 end
 
-CSV.open("../../csv/top_payments.csv", "w", :force_quotes => true) do |csv|
+CSV.open("#{project_root}/csv/top_payments.csv", "w", :force_quotes => true) do |csv|
   i = 0
   csv << ["rank","name","amount"]
   while i < top_payments.length
@@ -37,5 +37,5 @@ CSV.open("../../csv/top_payments.csv", "w", :force_quotes => true) do |csv|
 end
 
 puts "our results are: "
-system("cat ../../csv/top_payments.csv")
+system("cat #{project_root}/csv/top_payments.csv")
 
