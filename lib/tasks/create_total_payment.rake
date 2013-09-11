@@ -1,15 +1,9 @@
 namespace :csv do
   desc "create total payment csv file"
   task :create_total_payment do
-    # gets the project root
-
-    require 'csv'
-    require 'rubygems'
-    require 'sequel'
-    require 'logger'
 
     # connect to an postgres database
-    DB = Sequel.postgres("#{database_name}", :loggers => [Logger.new($stdout)])
+    DB = Sequel.postgres("#{@database_name}", :loggers => [Logger.new($stdout)])
 
     beginning = Time.now
 
@@ -23,6 +17,7 @@ namespace :csv do
     project_root = tasks_dir.gsub(/lib\/tasks/,"")
     Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
+    #sort the payments from 2007 and take first 200
     payments_sorted = Payment.sorted(2007,200)
 
     top_payments = []
