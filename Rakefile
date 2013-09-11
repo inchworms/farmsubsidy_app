@@ -9,8 +9,8 @@ Dir.glob('lib/tasks/*.rake').each { |r| import r }
 
 #take the database_name variable from command line input or fall back to default: test_db
 #i.e. rake db:createandmigrate database_name=xxxx  
-@database_name = ENV['database_name'] || 'farmsubsidy_test_db'  
-
+@database_name = ENV['database_name'] || 'farmsubsidy_development'  
+@project_root  = File.dirname(File.absolute_path(__FILE__))
 
 # fetch data and write to database
 # these tasks MUST be run in this sequence

@@ -3,23 +3,23 @@ namespace :populate do
   task :recipient_table do
 
     # connect to an in-memory database
-    DB = Sequel.postgres("#{@database_name}", :loggers => [Logger.new($stdout)])
-
+    DB = Sequel.postgres("#{@database_name}", :loggers => [Logger.new("#{@project_root}/log/#{@database_name}_db.log")])
+    
     beginning = Time.now
 
     # create a dataset from the recipient data
     recipient = DB[:recipients]
-    i = 0
-    recipient_txt = CSV.read("data/cz_recipient.txt", "r:UTF-8", :headers => true, :col_sep => ";") do |csv|
-      csv.each do |row|
-          print "." if i%100 == 0
-          recipient.insert(
-            global_recipient_id: row['globalRecipientId'],
-            zipcode: row['zipcode'],
-            name: row['name']
-          )
-        i += 1
-      end
+    
+    i = 0              
+    input_file_path = "#{@project_root}/data/cz_recipient.txt"
+
+    CSV.foreach(input_file_path, col_sep: ";", headers: true, encoding: "UTF-8") do |row|
+      print "." if i%100 == 0
+      recipient.insert(
+        global_recipient_id: row['globalRecipientId'],
+        zipcode: row['zipcode'],
+        name: row['name'])
+      i += 1
     end
 
     puts "For populating recipients table the Computer needs #{Time.now - beginning} seconds."
