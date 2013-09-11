@@ -1,4 +1,4 @@
-namespace :fetch do
+namespace :popuate do
   desc "populate year table"
   task :populate_year_table do
 
