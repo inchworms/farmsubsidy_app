@@ -6,17 +6,17 @@ namespace :populate do
     unless defined?(DB)
       DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS) 
     end
-    
+
     beginning = Time.now
+    puts "\n\nNow populating the recipients table."
 
     # create a dataset from the recipient data
     recipient = DB[:recipients]
-    
-    i = 0              
+
+    i = 0
 
     input_file_path = "#{DOCUMENT_ROOT}/data/#{RECIPIENT_FILE_NAME}"
 
-    puts "\n\nNow populating the recipients table."
 
     CSV.foreach(input_file_path, col_sep: ";", headers: true, encoding: "UTF-8") do |row|
       print "." if i%100 == 0

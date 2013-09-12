@@ -1,6 +1,6 @@
 # create and migrate new database
 
-namespace :db do 
+namespace :db do
   desc 'create a new db, drop old one with same name if present'
   task :create do
     if system("psql -l | grep #{DATABASE_NAME}")
@@ -9,7 +9,7 @@ namespace :db do
     end
     system("createdb #{DATABASE_NAME}")
   end
-  
+
   desc 'migrate database'
   task :migrate do
     unless defined?(DB)
