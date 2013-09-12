@@ -22,7 +22,7 @@ namespace :populate do
       i += 1
     end
 
-    puts "For populating recipients table the Computer needs #{Time.now - beginning} seconds."
+    puts "\nFor populating recipients table the Computer needs #{Time.now - beginning} seconds."
   end
 end
 

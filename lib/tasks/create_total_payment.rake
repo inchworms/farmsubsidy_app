@@ -37,6 +37,6 @@ namespace :csv do
       end
     end
 
-    puts "For creating a csv of ranked top recipients the Computer needs #{Time.now - beginning} seconds."
+    puts "\nFor creating a csv of ranked top recipients the Computer needs #{Time.now - beginning} seconds."
   end
 end

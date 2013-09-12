@@ -17,6 +17,6 @@ namespace :populate do
       )
     end
 
-    puts "For populating the years table the Computer needs #{Time.now - beginning} seconds."
+    puts "\nFor populating the years table the Computer needs #{Time.now - beginning} seconds."
   end
 end
