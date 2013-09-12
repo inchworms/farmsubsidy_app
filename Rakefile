@@ -25,7 +25,7 @@ LOGGERS = []
 desc 'delete and (re-)create db, read data from CSVs into db'
 task 'prepare_data' do
 
-  user_message  = "This task will delete the db '#{DATABASE_NAME}' and re-create it."+"\n"
+  user_message  = "This task will delete the db '#{DATABASE_NAME}' and re-create it."+"\n" 
   user_message += "It will parse the CSV-Files in /data and put the data into the database."+"\n"
   user_message += "Hit [Enter] if that is OK for you, else hit [Ctrl]+C."+"\n"
 

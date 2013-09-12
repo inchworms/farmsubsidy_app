@@ -31,6 +31,8 @@ namespace :populate do
     i = 0
     input_file_path = "#{DOCUMENT_ROOT}/data/#{PAYMENTS_FILE_NAME}"
 
+    puts "\n\nNow populating the payments table."
+
     CSV.foreach(input_file_path, col_sep: ";", headers: true, encoding: "UTF-8") do |row|
       print "." if i%100 == 0
       # find the recipient_id by searching recipient dataset

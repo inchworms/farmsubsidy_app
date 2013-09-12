@@ -16,6 +16,8 @@ namespace :populate do
 
     input_file_path = "#{DOCUMENT_ROOT}/data/#{RECIPIENT_FILE_NAME}"
 
+    puts "\n\nNow populating the recipients table."
+
     CSV.foreach(input_file_path, col_sep: ";", headers: true, encoding: "UTF-8") do |row|
       print "." if i%100 == 0
       recipient.insert(

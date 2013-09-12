@@ -25,6 +25,8 @@ namespace :populate do
 
     i = 0 
 
+    puts "\n\nNow populating the total_payments table."
+
     # look trought all recipients and all years and get the total amount
     Recipient.all.each do |recipient|
       Year.all.each do |year|
