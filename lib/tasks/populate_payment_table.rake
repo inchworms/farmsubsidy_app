@@ -44,7 +44,7 @@ namespace :populate do
       break if i > MAXIMUMROWS #(check for break in ruby)
     end
 
-    puts "For populating #{i} rows of the payment table the Computer needs #{Time.now - beginning} seconds."
+    puts "\nFor populating #{i} rows of the payment table the Computer needs #{Time.now - beginning} seconds."
   end
 end
 

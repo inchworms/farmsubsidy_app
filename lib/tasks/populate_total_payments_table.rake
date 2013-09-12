@@ -35,7 +35,7 @@ namespace :populate do
       end
     end
 
-    puts "For calculating total payments the Computer needs #{Time.now - beginning} seconds."
+    puts "\nFor calculating total payments the Computer needs #{Time.now - beginning} seconds."
   end
 end
 
