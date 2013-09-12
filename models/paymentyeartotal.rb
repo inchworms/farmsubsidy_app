@@ -8,5 +8,28 @@ class PaymentYearTotal < Sequel::Model
     self.count
   end
 
+  #method to find the top payments (including recipients) by year
+  #write this to a JSON file
+      #album = Album[1]
+      #album.to_json
+      # => '{"json_class"=>"Album","id"=>1,"name"=>"RF","artist_id"=>2}'
+
+  def sort_by_year
+    year = 2007
+    top_number = 20
+    
+    payments_sorted = PaymentYearTotal.sorted(year, top_number)
+
+    @top_payments = []
+
+    payments_sorted.each_with_index do |payment, index|
+      recipient_name = Recipient.where(id: payment[:recipient_id]).first[:name].gsub("\"", "")
+      @top_payments << {rank: index+1, name: recipient_name, amount: payment[:amount_euro]}
+    end
+
+  @top_payments.to_json
+
+  end
+
 end
 
