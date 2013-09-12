@@ -4,7 +4,7 @@ namespace :csv do
 
     # connect to an postgres database
     unless defined?(DB)
-      DB = Sequel.postgres("#{@database_name}", :loggers => LOGGERS) 
+      DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS) 
     end
     
 

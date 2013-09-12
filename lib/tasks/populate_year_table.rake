@@ -3,8 +3,10 @@ namespace :populate do
   task :year_table do
 
     # connect to an in-memory database
-    DB = Sequel.postgres("#{@database_name}", :loggers => LOGGERS)
-
+    unless defined?(DB)
+      DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS) 
+    end
+    
     beginning = Time.now
 
     # create a dataset from years

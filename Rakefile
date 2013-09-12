@@ -12,8 +12,8 @@ Dir.glob('lib/tasks/*.rake').each { |r| import r }
 DATABASE_NAME = ENV['database_name'] || 'farmsubsidy_development'
 DOCUMENT_ROOT = File.dirname(File.absolute_path(__FILE__))
 
-RECIPIENT_FILE_NAME =
-PAYMENTS_FILE_NAME  =
+RECIPIENT_FILE_NAME = 'cz_recipient.txt'
+PAYMENTS_FILE_NAME  = 'cz_payment.txt'
                                                                 
                                                                 
 # logging is optional

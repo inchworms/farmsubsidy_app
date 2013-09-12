@@ -3,7 +3,9 @@ namespace :populate do
   task :total_payments_table do
 
     # connect to an in-memory database
-    DB = Sequel.postgres("#{@database_name}", :loggers => LOGGERS)
+    unless defined?(DB)
+      DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS) 
+    end
 
     beginning = Time.now
 
@@ -21,9 +23,12 @@ namespace :populate do
     # connect to payments total table and add data to the database
     total_payment = DB[:payment_year_totals]
 
+    i = 0 
+
     # look trought all recipients and all years and get the total amount
     Recipient.all.each do |recipient|
       Year.all.each do |year|
+        print "." if i%100 == 0
         total = recipient.total_payment_amount_per_year(year.year)
         if total != 0.0
           total_payment.insert(
@@ -33,6 +38,7 @@ namespace :populate do
             )
         end
       end
+      i += 1
     end
 
     puts "\nFor calculating total payments the Computer needs #{Time.now - beginning} seconds."
