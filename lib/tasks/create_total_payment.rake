@@ -3,7 +3,10 @@ namespace :csv do
   task :create_total_payment do
 
     # connect to an postgres database
-    DB = Sequel.postgres("#{@database_name}", :loggers => [Logger.new($stdout)])
+    unless defined?(DB)
+      DB = Sequel.postgres("#{@database_name}", :loggers => LOGGERS) 
+    end
+    
 
     beginning = Time.now
 

@@ -3,7 +3,7 @@ namespace :populate do
   task :year_table do
 
     # connect to an in-memory database
-    DB = Sequel.postgres("#{@database_name}", :loggers => [Logger.new("#{@project_root}/log/#{@database_name}_db.log")])
+    DB = Sequel.postgres("#{@database_name}", :loggers => LOGGERS)
 
     beginning = Time.now
 

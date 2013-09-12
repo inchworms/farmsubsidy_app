@@ -9,15 +9,23 @@ Dir.glob('lib/tasks/*.rake').each { |r| import r }
 
 #take the database_name variable from command line input or fall back to default: test_db
 #i.e. rake db:createandmigrate database_name=xxxx  
-@database_name = ENV['database_name'] || 'farmsubsidy_development'
-@project_root  = File.dirname(File.absolute_path(__FILE__))
+DATABASE_NAME = ENV['database_name'] || 'farmsubsidy_development'
+DOCUMENT_ROOT = File.dirname(File.absolute_path(__FILE__))
+
+RECIPIENT_FILE_NAME =
+PAYMENTS_FILE_NAME  =
+                                                                
+                                                                
+# logging is optional
+# LOGGERS = [Logger.new("#{@project_root}/log/#{@database_name}_db.log")]
+LOGGERS = []
 
 # fetch data and write to database
 # these tasks MUST be run in this sequence
 desc 'delete and (re-)create db, read data from CSVs into db'
 task 'prepare_data' do
 
-  user_message  = "This task will delete the db '#{@database_name}' and re-create it."+"\n"
+  user_message  = "This task will delete the db '#{DATABASE_NAME}' and re-create it."+"\n"
   user_message += "It will parse the CSV-Files in /data and put the data into the database."+"\n"
   user_message += "Hit [Enter] if that is OK for you, else hit [Ctrl]+C."+"\n"
 

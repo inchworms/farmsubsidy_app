@@ -3,7 +3,7 @@ namespace :populate do
   task :recipient_table do
 
     # connect to an in-memory database
-    DB = Sequel.postgres("#{@database_name}", :loggers => [Logger.new("#{@project_root}/log/#{@database_name}_db.log")])
+    DB = Sequel.postgres("#{@database_name}", :loggers => LOGGERS)
     
     beginning = Time.now
 
@@ -11,7 +11,8 @@ namespace :populate do
     recipient = DB[:recipients]
     
     i = 0              
-    input_file_path = "#{@project_root}/data/cz_recipient.txt"
+
+    input_file_path = "#{@project_root}/data/#{RECIPIENT_FILE_NAME}"
 
     CSV.foreach(input_file_path, col_sep: ";", headers: true, encoding: "UTF-8") do |row|
       print "." if i%100 == 0
