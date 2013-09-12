@@ -12,6 +12,7 @@ Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
 
 get '/' do
+  @year = Year.year_for(8)
   @recipient = Recipient.all
   erb :top_payment
 end

@@ -1,7 +1,8 @@
 Hello <b><%= p @results.name %></b> with the ID Number: <b><%= p @results.id %></b>.
 <p>
 <% @payments.each do |payment| %>
-  <%= p payment.amount_euro.to_i %> Euro in <%= p payment.year_id %>
+  <%= p payment.amount_euro.to_i %> Euro in <%= p Year.year_for(payment.year_id) %>
 <% end %>
 <p>
-<%= p @payments.first %> Euro
+<%= p @payments.first.methods.sort %>
+<%= p @payments.first.year_id %>
