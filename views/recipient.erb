@@ -1,1 +1,4 @@
-<%= p @recipient.name %>
+The recipient <b><%= @recipient.name %></b> gets:<p>
+<% @recipient.payments.each do |payment| %>
+  <p><%= payment.amount_euro.to_i %> Euro in Year <%= Year.year_for(payment.year_id) %>.
+<% end %>
