@@ -19,3 +19,49 @@ Select Year
 <p>
 <%= @ranked %> 
 </p>
+
+<script type="text/javascript">
+var ranked = <%= @ranked %>
+var color = d3.scale.quantize()
+      .range(["rgb(173,221,142)","rgb(120,198,121)","rgb(65,171,93)","rgb(35,132,67)","rgb(0,104,55)","rgb(0,69,41)"]);
+      // .range(colorbrewer.YlOrBr[7]);
+
+    d3.json(ranked, function(data){
+      var svg = d3.select("body")
+        .append("svg")
+        .attr("width", window.innerWidth)
+        .attr("height",window.innerHeight);
+        
+      var chart = d3.select("svg")
+        .attr("class", "chart")
+        .attr("width", 720)
+        .attr("length", 40 * data.length);
+
+      var x = d3.scale.linear()
+        .domain([0, d3.max(data, function(d){ return +d.amount })])
+        .rangeRound([0, 420]);
+
+      color.domain([
+        d3.min(data, function(d){ return +d.amount }),
+        d3.max(data, function(d){ return +d.amount })
+        ]);
+
+      chart.selectAll("rect")
+        .data(data)
+        .enter().append("rect")
+        .attr("y", function(d, i) { return i * 41; })
+        .attr("width", function(d) { return (x(+d.amount)) })
+        .attr("height", 40 )
+        .attr("fill", function(d) {
+        //Get data value
+          var value = d.amount;
+            if (value) {
+              //If value exists…
+              return color(value);
+            } else {
+              //If value is undefined…
+              return "#fff";
+            };
+          });
+      });
+</script>
