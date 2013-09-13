@@ -21,18 +21,15 @@ get '/' do
   erb :index
 end
 
-get '/search' do
-  erb :search
-end
-
-get '/:id' do
-  @id = params[:id]
-  @recipient = Recipient[params[:id]]
-  erb :recipient
-end
-
 get '/recipient/:id' do
   @recipient = Recipient[params[:id]]
   @payments = Payment.where(:recipient_id => params[:id])
   erb :recipient
 end
+
+get '/ranked' do
+  @ranked = PaymentYearTotal.sortbyyear
+  erb :ranked
+end
+
+
