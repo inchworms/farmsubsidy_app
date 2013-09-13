@@ -2,6 +2,7 @@
 
 namespace :db do
   desc 'create a new db, drop old one with same name if present'
+  # TODO: is NOT droping the database
   task :create do
     if system("psql -l | grep #{DATABASE_NAME}")
       #if it is then drop the db 
