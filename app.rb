@@ -31,8 +31,8 @@ get '/:id' do
   erb :recipient
 end
 
-get '/payment/:id' do
+get '/recipient/:id' do
   @recipient = Recipient[params[:id]]
   @payments = Payment.where(:recipient_id => params[:id])
-  erb :payment
+  erb :recipient
 end

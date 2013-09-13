@@ -6,7 +6,7 @@
 
 <p>
 <% @recipients.each do | recipient | %>
-  <p><%= "recipientnumber #{recipient.id}:"%> <a href="payment/<%= recipient.id %>"><%= recipient.name %></a></p>
+  <p><a href="recipient/<%= recipient.id %>"><%= recipient.name %></a></p>
 <% end %>
 <br>
 

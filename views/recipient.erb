@@ -1,17 +1,4 @@
-<%= @recipient.inspect %><br>
-<%= @recipient.class %><br>
+The recipient <b><%= @recipient.name %></b> gets:<p>
 <% @recipient.payments.each do |payment| %>
-  <p><%= payment.amount_euro %>
+  <p><%= payment.amount_euro.to_i %> Euro in Year <%= Year.year_for(payment.year_id) %>.
 <% end %>
-<%= "PAYMENTS: #{@recipient.payments}" %><br>
-<%= @recipient.methods.sort %><br>
-<%= @recipient.methods.length %><br>
-<%# @payments.all %>
-<%# @recipient.all.methods %>
-<%# @recipient.all.methods.length %>
-
-
-
-<%= Recipient[1].payments.inspect %>
-Payments für rec=1
-<%= Payment.where(recipient_id: 1).all.length %>
