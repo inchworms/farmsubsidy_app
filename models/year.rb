@@ -9,6 +9,10 @@ class Year < Sequel::Model
   def self.year_for(year_id)
     Year.where(id: year_id.to_i).first[:year]
   end
+
+  def self.full_range
+    (Year.min(:year) .. Year.max(:year))
+  end
 end
 
 

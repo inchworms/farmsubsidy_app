@@ -13,8 +13,8 @@ class PaymentYearTotal < Sequel::Model
   end
 
   #method to find the top payments by recipient by year
-  def self.sortbyyear
-    year = 2007
+  def self.sortbyyear(year)
+    #year = 2007
     limit = 20
     
     #find all payments by year, sort, and return limit.

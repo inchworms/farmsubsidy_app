@@ -4,7 +4,7 @@ require 'sequel'
 require 'sinatra/reloader' if development?
 
 # connect to an in-memory database
-DB = Sequel.postgres("farmsubsidy_performance")
+DB = Sequel.postgres("farmsubsidy_development")
 
 # connect to the models
 project_root = File.dirname(File.absolute_path(__FILE__))
@@ -25,9 +25,8 @@ get '/search' do
 end
 
 get '/ranked' do
-  @ranked = PaymentYearTotal.sortbyyear
+  @ranked = PaymentYearTotal.sortbyyear(params[:year])
   erb :ranked
-
 end
 
 

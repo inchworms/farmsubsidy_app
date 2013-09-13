@@ -1,4 +1,21 @@
 <p>
+Select Year
+<div class="row">
+  <div class="col-lg-2">
+    <form action="/ranked" method="get">
+      <select class="form-control" name="year">
+        <% Year.full_range.each do |year| %>
+          <option <%= "selected" if year.to_s == params[:year] %>><%= year %></option>
+        <% end %>
+      </select>
+      <button class="btn" type="submit">
+        Filter by Year
+      </button>
+    </form>
+  </div>
+</div>
+</p>
 
-<%= @ranked %> 
 <p>
+<%= @ranked %> 
+</p>
