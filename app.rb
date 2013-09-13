@@ -30,7 +30,11 @@ get '/recipient/:id' do
 end
 
 get '/ranked' do
-  @ranked = PaymentYearTotal.sortbyyear(params[:year])
+  if params[:year]
+    @ranked = PaymentYearTotal.sortbyyear(params[:year])
+  else
+    @ranked = PaymentYearTotal.sortbyyear(2007)
+  end
   erb :ranked
 end
 
