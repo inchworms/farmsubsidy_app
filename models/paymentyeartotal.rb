@@ -3,7 +3,7 @@ require 'sequel'
 
 
 # Create a Total Payment model.
-class PaymentYearTotal < Sequel::Model(:payment_year_totals)
+class PaymentYearTotal < Sequel::Model
   many_to_many :recipient
   many_to_many :year
   one_to_many :payments
@@ -12,25 +12,24 @@ class PaymentYearTotal < Sequel::Model(:payment_year_totals)
     self.count
   end
 
-  #method to find the top payments (including recipients) by year
-  #write this to a JSON file
-      #album = Album[1]
-      #album.to_json
-      # => '{"json_class"=>"Album","id"=>1,"name"=>"RF","artist_id"=>2}'
-
-  def sortbyyear
+  #method to find the top payments by recipient by year
+  def self.sortbyyear
     year = 2007
-    top_number = 20
+    limit = 20
     
-    payments_sorted = PaymentYearTotal.sorted(year, top_number)
+    #find all payments by year, sort, and return limit.
+    top_payments_sorted = self.where(year_id: Year.id_for(year)).
+              reverse_order(:amount_euro).
+              limit(limit).
+              all
 
-    top_payments = []
+    top_payments_ranked = []
 
-    payments_sorted.each_with_index do |payment, index|
+    top_payments_sorted.each_with_index do |payment, index|
       recipient_name = Recipient.where(id: payment[:recipient_id]).first[:name].gsub("\"", "")
-      top_payments << {rank: index+1, name: recipient_name, amount: payment[:amount_euro]}
+      top_payments_ranked << {rank: index+1, name: recipient_name, amount: payment[:amount_euro].to_i}
     end
-  @json_top_payments = top_payments.to_json
+  @json_top_payments_ranked = top_payments_ranked.to_json
   end
 end
 

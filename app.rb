@@ -24,8 +24,10 @@ get '/search' do
   erb :search
 end
 
-get '/:id' do
-  @id = params[:id]
-  @recipient = Recipient[params[:id]]
-  erb :recipient
+get '/ranked' do
+  @ranked = PaymentYearTotal.sortbyyear
+  erb :ranked
+
 end
+
+
