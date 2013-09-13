@@ -14,8 +14,7 @@ DOCUMENT_ROOT = File.dirname(File.absolute_path(__FILE__))
 
 RECIPIENT_FILE_NAME = 'cz_recipient.txt'
 PAYMENTS_FILE_NAME  = 'cz_payment.txt'
-                                                                
-                                                                
+
 # logging is optional
 # LOGGERS = [Logger.new("#{@project_root}/log/#{@database_name}_db.log")]
 LOGGERS = []

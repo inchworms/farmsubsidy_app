@@ -12,15 +12,15 @@ Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
 
 get '/' do
-  @year = Year.year_for(8)
-  @recipient = Recipient.all
-  erb :top_payment
+  if params[:name]
+    @recipients = Recipient.where(Sequel.like(:name, "%#{params[:name]}%"))
+  else
+    @recipients = Recipient.all
+  end
+  erb :index
 end
 
-post '/search' do
-  @name = params[:name]
-  @results = Recipient[:name=>params[:name]]
-  @payments = @results.payments
+get '/search' do
   erb :search
 end
 

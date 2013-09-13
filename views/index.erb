@@ -1,0 +1,11 @@
+<%= p @year %>
+<form action="/" method="get">
+  <input type="text" name="name" value="<%= params[:name] %>"/><br />
+  <input type="submit" />
+</form>
+
+<p>
+<% @recipients.each do | recipient | %>
+  <p><%= "recipientnumber #{recipient.id}: #{recipient.name}" %>
+<% end %>
+<br>

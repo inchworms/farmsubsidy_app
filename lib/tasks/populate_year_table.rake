@@ -4,7 +4,7 @@ namespace :populate do
 
     # connect to an in-memory database
     unless defined?(DB)
-      DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS) 
+      DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS)
     end
 
     beginning = Time.now

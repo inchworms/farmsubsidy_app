@@ -4,7 +4,7 @@ namespace :populate do
 
     # connect to an in-memory database
     unless defined?(DB)
-      DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS) 
+      DB = Sequel.postgres("#{DATABASE_NAME}", :loggers => LOGGERS)
     end
 
     beginning = Time.now
@@ -23,7 +23,7 @@ namespace :populate do
     # connect to payments total table and add data to the database
     total_payment = DB[:payment_year_totals]
 
-    i = 0 
+    i = 0
 
     puts "\n\nNow populating the total_payments table."
 
