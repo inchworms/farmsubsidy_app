@@ -6,8 +6,7 @@ require 'logger'
 
 # connect to an in-memory database
 
-DB = Sequel.postgres("farmsubsidy_development", :loggers => [Logger.new($stdout)])
-
+DB = Sequel.postgres("farmsubsidy_development")
 
 # connect to the models
 project_root = File.dirname(File.absolute_path(__FILE__))
@@ -25,7 +24,6 @@ end
 
 get '/recipient/:id' do
   @recipient = Recipient[params[:id]]
-  @payments = Payment.where(:recipient_id => params[:id])
   erb :recipient
 end
 

@@ -15,11 +15,11 @@
     </form>
   </div>
 </div>
-
-<div id="bar-chart" class="col-md-8"></div>
-  
+<div class="row">
+  <div id="bar-chart" class="col-md-8"></div>
+</div>
 <script type="text/javascript">
-  var data = <%=@ranked%>; 
+  var data = <%= @ranked %>; 
   var color = d3.scale.quantize()
         .range(["rgb(173,221,142)","rgb(120,198,121)","rgb(65,171,93)","rgb(35,132,67)","rgb(0,104,55)","rgb(0,69,41)"]);
         // .range(colorbrewer.YlOrBr[7]);

@@ -1,12 +1,26 @@
-<%= @year %>
-<form action="/" method="get">
-  <input type="text" name="name" value="<%= params[:name] %>"/><br />
-  <input type="submit" />
-</form>
+<div class="row">
+  <div class="col-lg-4">
+    <form action="/" method="get">
+      <fieldset>
+        <legend>Farmsubsidy</legend>
+        <label>
+        Search for a name:
+        </label>
+        <input type="text" name="name" value="<%= params[:name] %>">
+        <button class="btn" type="submit">
+          Search
+        </button>
+      </fieldset>
+    </form>
+  </div>
+</div>
 
-<p>
-<% @recipients.each do | recipient | %>
-  <p><a href="recipient/<%= recipient.id %>"><%= recipient.name %></a></p>
-<% end %>
-<br>
 
+<div class="row">
+  <div class="col-lg-4">
+    <h3>All Recipients:</h3>
+    <% @recipients.each do | recipient | %>
+      <p><a href="recipient/<%= recipient.id %>"><%= recipient.name %></a></p>
+    <% end %>
+  </div>
+</div>

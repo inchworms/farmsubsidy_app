@@ -1,4 +1,12 @@
-The recipient <b><%= @recipient.name %></b> gets:<p>
-<% @recipient.payments.each do |payment| %>
-  <p><%= payment.amount_euro.to_i %> Euro in Year <%= Year.year_for(payment.year_id) %>.
-<% end %>
+<div class="row">
+  <div class="col-lg-4">
+    The recipient <b><%= @recipient.name %></b> got:
+    <% payments_sorted = @recipient.payments.sort_by {|hsh| hsh[:year_id]} %>
+    <% payments_sorted.each do |payment| %>
+      <p><%= payment.amount_euro.to_i %> Euro in Year <%= Year.year_for(payment.year_id) %>.</p>
+    <% end %>
+    In total <%= @recipient.name %> got <%= PaymentYearTotal.where(:recipient_id => @recipient.id).sum(:amount_euro).to_i %> Euro.
+  </div>
+</div>
+
+
