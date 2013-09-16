@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-12">
     <form action="/" method="get">
       <fieldset>
         <legend>Farmsubsidy</legend>
@@ -19,7 +19,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-12">
     <h3>All Recipients:</h3>
     <% @recipients.each do | recipient | %>
       <p><a href="recipient/<%= recipient.id %>"><%= recipient.name %></a></p>

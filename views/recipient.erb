@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-12">
     The recipient <b><%= @recipient.name %></b> got:<p></p>
     <% payments_sorted = @recipient.payments.sort_by {|hsh| hsh[:year_id]} %>
     <% payments_sorted.each do |payment| %>
