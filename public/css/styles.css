@@ -1,9 +1,31 @@
-body {    background: #EDEEE8;
+body {    background-color: #F0EDE8;
           font-family: Helvetica, Arial, sans-serif;
 }
 
 #container {
+          background-color: #E6E2E1;
           width: 800px;
           margin-right: auto;
           margin-left: auto;
 }
+
+
+#bar-chart {
+  font-family: 'Droid Sans', sans-serif;
+}
+
+#bar-chart text.bar-label {
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  fill: #4D4D4D;
+;
+}
+
+#bar-chart text.bar-value {
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 14px;
+  fill: #4D4D4D;
+}
+
+
