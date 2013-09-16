@@ -11,6 +11,11 @@ DB = Sequel.postgres("farmsubsidy_development")
 project_root = File.dirname(File.absolute_path(__FILE__))
 Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
+helpers do
+  def format_large_number(number)
+    number.to_s.gsub(/\D/, '').reverse.gsub(/.{3}/, '\0.').reverse.gsub(/^\./, '')
+  end
+end
 
 get '/' do
   if params[:name]

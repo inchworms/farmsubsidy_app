@@ -1,17 +1,17 @@
-<div class="row" style="position:relative";>
+<div class="row" style="position:relative;padding: 4px">
   <div class="col-lg-3">
     The recipient <b><%= @recipient.name %></b> got:<p></p>
     <% payments_sorted = @recipient.payments.sort_by {|hsh| hsh[:year_id]} %>
     <% @payment_amount_array = [] %>
     <% payments_sorted.each do |payment| %>
-      <p><%= payment.amount_euro.to_i %> Euro in Year <%= Year.year_for(payment.year_id) %>.</p>
+      <p><%= format_large_number(payment.amount_euro.to_i) %> Euro in Year <%= Year.year_for(payment.year_id) %>.</p>
       <% @payment_amount_array << {amount: payment.amount_euro.to_i, year: Year.year_for(payment.year_id)} %>
     <% end %>
-    In total <%= @recipient.name %> got <%= PaymentYearTotal.where(:recipient_id => @recipient.id).sum(:amount_euro).to_i %> Euro.<br>
+    <hr>
+    In total <b><%= @recipient.name %></b> got <%= format_large_number(PaymentYearTotal.where(:recipient_id => @recipient.id).sum(:amount_euro).to_i) %> Euro.<br>
 <!--     In total <%= @recipient.name %> got <%= @recipient.total_payment_amount %> Euro.
  -->
   </div>
-
   <div id="bar-chart" class="col-lg-9" style="position:absolute; bottom:10px; right: 0px;" ></div>
 </div>
 
@@ -87,7 +87,7 @@
     })
     .attr("font-family", "sans-serif")
     .attr("font-size", "11px")
-    .attr("fill", "white");  
+    .attr("fill", "white");
 
     //Create year labels
   svg.selectAll("text")

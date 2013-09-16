@@ -15,5 +15,5 @@ class Payment < Sequel::Model
           limit(limit).
           all
   end
-end
 
+end
