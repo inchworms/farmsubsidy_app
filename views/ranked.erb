@@ -43,19 +43,19 @@
   var data = <%= @ranked %>;
 
   // variables assigned
-  var valueLabelWidth = 100; // space reserved for value labels (right)
+  var valueLabelWidth = 120; // space reserved for value labels (right)
   var barHeight = 35; // height of one bar
   var barLabelWidth = 280; // space reserved for bar labels
   var barLabelPadding = 5; // padding between bar and bar labels (left)
   var gridLabelHeight = 18; // space reserved for gridline labels
   var gridChartOffset = 5; // space between start of grid and first bar
-  var maxBarWidth = 420; // width of the bar with the max value
+  var maxBarWidth = 400; // width of the bar with the max value
   var paddingBetweenBars = 1.1;
 
   // format currency
   var formatNumber = d3.format(",");
-           // formatCurrency = function (d) {return "$" + formatNumber(d); };
 
+  // color of bars
   var color = d3.scale.quantize()
       .domain([ d3.min(data, function(d){ return +d.amount }),
                 d3.max(data, function(d){ return +d.amount })])
