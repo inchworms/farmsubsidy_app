@@ -5,7 +5,6 @@ require 'sinatra/reloader' if development?
 require 'logger'
 
 # connect to an in-memory database
-
 DB = Sequel.postgres("farmsubsidy_development")
 
 # connect to the models
@@ -34,6 +33,15 @@ get '/ranked' do
     @ranked = PaymentYearTotal.sortbyyear(2007)
   end
   erb :ranked
+end
+
+get '/ranked_test' do
+  if params[:year]
+    @ranked = PaymentYearTotal.sortbyyear(params[:year])
+  else
+    @ranked = PaymentYearTotal.sortbyyear(2007)
+  end
+  erb :ranked_test
 end
 
 

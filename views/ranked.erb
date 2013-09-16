@@ -19,47 +19,67 @@
   <div id="bar-chart" class="col-md-8"></div>
 </div>
 <script type="text/javascript">
-  var data = <%= @ranked %>; 
-  var color = d3.scale.quantize()
-        .range(["rgb(173,221,142)","rgb(120,198,121)","rgb(65,171,93)","rgb(35,132,67)","rgb(0,104,55)","rgb(0,69,41)"]);
-        // .range(colorbrewer.YlOrBr[7]);
-    
-        var svg = d3.select("#bar-chart")
-          .append("svg")
-          .attr("width", window.innerWidth)
-          .attr("height",window.innerHeight);
-          
-        var chart = d3.select("svg")
-          .attr("class", "chart")
-          .attr("width", 720)
-          .attr("length", 40 * data.length);
+  var data = <%= @ranked %>;
 
-        var x = d3.scale.linear()
-          .domain([0, d3.max(data, function(d){ return +d.amount })])
-          .rangeRound([0, 420]);
+  // accessor functions 
+  var barLabel = function(d) { return d['name']; };
+  var barValue = function(d) { return parseFloat(d['amount']); };
 
-        color.domain([
-          d3.min(data, function(d){ return +d.amount }),
-          d3.max(data, function(d){ return +d.amount })
-          ]);
+  var barLabelWidth = 100; // space reserved for bar labels
+  var barLabelPadding = 5; // padding between bar and bar labels (left)
 
-        chart.selectAll("rect")
-          .data(data)
-          .enter().append("rect")
-          .attr("y", function(d, i) { return i * 41; })
-          .attr("width", function(d) { return (x(+d.amount)) })
-          .attr("height", 40 )
-          .attr("fill", function(d) {
-          //Get data value
-            var value = d.amount;
-              if (value) {
-                //If value exists…
-                return color(value);
-              } else {
-                //If value is undefined…
-                return "#fff";
-              };
-            });
-    
+  // scales
+  var yScale = d3.scale.ordinal().domain(d3.range(0, data.length)).rangeBands([0, data.length * 40]);
+  var y = function(d, i) { return yScale(i); };
+  var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
+
+    var svg = d3.select("#bar-chart")
+      .append("svg")
+      .attr("width", window.innerWidth)
+      .attr("height",window.innerHeight);
+
+    var chart = d3.select("svg")
+      .attr("class", "chart")
+      .attr("width", 720)
+      .attr("length", 40 * data.length);
+
+    var x = d3.scale.linear()
+      .domain([0, d3.max(data, function(d){ return +d.amount })])
+      .rangeRound([0, 420]);
+
+    var color = d3.scale.quantize()
+      .domain([ d3.min(data, function(d){ return +d.amount }),
+                d3.max(data, function(d){ return +d.amount })])
+      .range(["rgb(217, 240, 163)","rgb(173,221,142)","rgb(120,198,121)","rgb(65,171,93)","rgb(35,132,67)","rgb(0,104,55)","rgb(0,69,41)"]);
+
+    chart.selectAll("rect")
+      .data(data)
+      .enter().append("rect")
+      .attr("y", function(d, i) { return i * 41; })
+      .attr("width", function(d) { return (x(+d.amount)) })
+      .attr("height", 40 )
+      .attr("fill", function(d) {
+      //Get data value
+        var value = d.amount;
+          if (value) {
+            //If value exists…
+            return color(value);
+          } else {
+            //If value is undefined…
+            return "#fff";
+          };
+        });
+
+    // bar value labels
+    chart.selectAll("text").data(data).enter().append("text")
+      .attr("x", function(d) { return x(barValue(d)); })
+      .attr("y", yText)
+      .attr("dx", 3) // padding-left
+      .attr("dy", ".35em") // vertical-align: middle
+      .attr("text-anchor", "start") // text-align: right
+      .attr("fill", "black")
+      .attr("stroke", "none")
+      .text(function(d) { return d3.round(barValue(d), 2); });
+
 </script>
 
