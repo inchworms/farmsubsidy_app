@@ -92,7 +92,9 @@
           //If value is undefined…
           return "#fff";
         };
-      });
+      })
+    .append("svg:title")
+    .text(function(d) { return "year: " + d.year; });
 
   // bar value labels
   barsContainer.selectAll("text.bar-value").data(data).enter().append("text")
