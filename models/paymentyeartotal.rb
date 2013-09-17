@@ -18,19 +18,19 @@ class PaymentYearTotal < Sequel::Model
     limit = 10
     
     #find all payments by year, sort, and return limit.
-    top_payments_sorted = self.where(year_id: Year.id_for(year)).
+    top_payments_sorted_dataset = self.where(year_id: Year.id_for(year)).
               reverse_order(:amount_euro).
               limit(limit).
               all
 
-    top_payments_ranked = []
+    top_payments_sorted_array = []
 
-    top_payments_sorted.each_with_index do |payment, index|
+    top_payments_sorted_dataset.each_with_index do |payment, index|
       recipient_name = Recipient.where(id: payment[:recipient_id]).first[:name].gsub("\"", "")
-      top_payments_ranked << {rank: index+1, name: recipient_name, amount: payment[:amount_euro].to_i}
+      top_payments_sorted_array << {rank: index+1, name: recipient_name, amount: payment[:amount_euro].to_i}
     end
 
-    @json_top_payments_ranked = top_payments_ranked.to_json
+    top_payments_sorted_array.to_json
   end
 
   def self.sortbypayment

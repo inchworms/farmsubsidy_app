@@ -7,6 +7,12 @@ body {    background-color: #F0EDE8;
           width: 800px;
           margin-right: auto;
           margin-left: auto;
+          margin-top: 20px;
+}
+
+.row {
+          margin-left: 5px;
+          margin-top: 20px;
 }
 
 
