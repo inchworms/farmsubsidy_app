@@ -33,20 +33,16 @@ end
 
 get '/ranked' do
   if params[:year]
-    @ranked = PaymentYearTotal.sortbyyear(params[:year])
+    @ranked_by_year = PaymentYearTotal.sortbyyear(params[:year])
   else
-    @ranked = PaymentYearTotal.sortbyyear(2007)
+    @ranked_by_year = PaymentYearTotal.sortbyyear(2007)
   end
   erb :ranked
 end
 
-get '/ranked_test' do
-  if params[:year]
-    @ranked = PaymentYearTotal.sortbyyear(params[:year])
-  else
-    @ranked = PaymentYearTotal.sortbyyear(2007)
-  end
-  erb :ranked_test
+get '/ranked_total' do
+  @ranked_total = PaymentYearTotal.sortbypayment
+  erb :ranked_total
 end
 
 
