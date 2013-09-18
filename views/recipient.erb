@@ -1,25 +1,20 @@
 <div class="row" style="position:relative;padding: 4px">
   <div class="col-lg-3">
     The recipient <b><%= @recipient.name %></b> got:<p></p>
-    <% payments_sorted = @recipient.payments.sort_by {|payment| payment[:year_id]} %>
-    <% @payment_amount_array = [] %>
-    <% payments_sorted.each do |payment| %>
-      <p><%= format_large_number(payment.amount_euro.to_i) %> Euro in Year <%= payment.year.year %>.</p>
-      <% @payment_amount_array << [year, amount] # {amount: payment.amount_euro.to_i, year: Year.year_for(payment.year_id)} %>
-    <% end %>
-    <% @year_table.each do |year, amount| %>
-    # [[2009, '2324'],[2010, '2324,00']]
-      <p><%= format_large_number(payment.amount_euro.to_i) %> Euro in Year <%= Year.year_for(payment.year_id) %>.</p>
+    <%= @year_table %>
+    <% @year_table.each do |year, payment| %>
+      <p><%= payment %> Euro in Year <%= year %>.</p>
     <% end %>
     <hr>
     In total <b><%= @recipient.name %></b> got <%= format_large_number(PaymentYearTotal.where(:recipient_id => @recipient.id).sum(:amount_euro).to_i) %> Euro.<br>
-<!--     In total <%= @recipient.name %> got <%= @recipient.total_payment_amount %> Euro.
- -->
   </div>
   <div id="bar-chart" class="col-lg-9" style="position:absolute; bottom:10px; right: 0px;" ></div>
 </div>
+    <%= @payment_amount_array = @year_table.map { |o| Hash[o.each_pair.to_a] }.to_json %>
 
-<% @payment_amount_array_json = @payment_amount_array.to_json %>
+<% @year_table = @payment_amount_array.to_json %>
+
+<%= @payment_amount_array.to_json %>
 
 <script type="text/javascript">
 
