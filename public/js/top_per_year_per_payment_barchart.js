@@ -1,6 +1,11 @@
-// TODO describe this script and that it requires a data-varibable to be set before it is run
+// in the erb file we need to assign the javascript variable data
+// in our case the erb file is called ranked_per_year_per_payment.erb
+// <script type="text/javascript" charset="utf-8">
+//   var data = <%= @ranked_by_year %>;
+// </script>
 
-// variables assigned
+
+  // variables assigned
 var valueLabelWidth = 120; // space reserved for value labels (right)
 var barHeight = 35; // height of one bar
 var barLabelWidth = 280; // space reserved for bar labels

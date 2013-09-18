@@ -1,3 +1,9 @@
+// in the erb file we need to assign the javascript variable data
+// in our case the erb file is called ranked_all_years_per_payment.erb
+// <script type="text/javascript" charset="utf-8">
+//   var data = <%= @@ranked_total %>;
+// </script>
+
 
   // variables assigned
   var valueLabelWidth = 120; // space reserved for value labels (right)
