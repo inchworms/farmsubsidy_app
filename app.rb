@@ -13,7 +13,7 @@ Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
 helpers do
   def format_large_number(number)
-    number.to_s.gsub(/\D/, '').reverse.gsub(/.{3}/, '\0.').reverse.gsub(/^\./, '')
+    number.to_s.gsub(/\D/, '').reverse.gsub(/.{3}/, '\0\'').reverse.gsub(/^\'/, '')
   end
 end
 
