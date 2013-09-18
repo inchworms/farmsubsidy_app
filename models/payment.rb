@@ -16,7 +16,7 @@ class Payment < Sequel::Model
           all
   end
   
-  def year_number
+  def date
     self.year.year
   end
 
