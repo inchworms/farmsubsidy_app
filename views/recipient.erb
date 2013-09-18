@@ -1,7 +1,6 @@
 <div class="row" style="position:relative;padding: 4px">
   <div class="col-lg-3">
     The recipient <b><%= @recipient.name %></b> got:<p></p>
-    <%= @year_table %>
     <% @year_table.each do |year, payment| %>
       <p><%= payment %> Euro in Year <%= year %>.</p>
     <% end %>
@@ -10,16 +9,17 @@
   </div>
   <div id="bar-chart" class="col-lg-9" style="position:absolute; bottom:10px; right: 0px;" ></div>
 </div>
-    <%= @payment_amount_array = @year_table.map { |o| Hash[o.each_pair.to_a] }.to_json %>
 
-<% @year_table = @payment_amount_array.to_json %>
+<% @year_table_array_of_hashes = []  %>
+<% @year_table.each do |year , payment| %>
+  <% @year_table_array_of_hashes << {year: year, amount: payment} %>
+<% end %>
 
-<%= @payment_amount_array.to_json %>
 
 <script type="text/javascript">
 
-  var dataset = <%= @payment_amount_array.to_json %>
-
+  var dataset = <%= @year_table_array_of_hashes.to_json %>
+  console.log(dataset)
   var w = 550;
   var h = 250;
 

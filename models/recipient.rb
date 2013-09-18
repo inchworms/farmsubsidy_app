@@ -33,7 +33,7 @@ class Recipient < Sequel::Model
     payments_sorted = self.payments.sort_by { |payment| payment[:year_id] }
     payment_amount_year_array = []
     payments_sorted.each do |payment| 
-      payment_amount_year_array << [ payment.date, payment.amount_euro.to_i]
+      payment_amount_year_array << [ payment.date, format_large_number(payment.amount_euro.to_i)]
     end
     payment_amount_year_array
   end
