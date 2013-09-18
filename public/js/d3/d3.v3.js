@@ -8,8 +8,8 @@ d3 = function() {
   function d3_source(d) {
     return d.source;
   }
-  // changed thousands Seperator from , to .
-  var d3_format_decimalPoint = ".", d3_format_thousandsSeparator = ".", d3_format_grouping = [ 3, 3 ];
+  // changed thousands Seperator from , to '
+  var d3_format_decimalPoint = ".", d3_format_thousandsSeparator = "'", d3_format_grouping = [ 3, 3 ];
   if (!Date.now) Date.now = function() {
     return +new Date();
   };
