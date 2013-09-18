@@ -27,6 +27,14 @@
   // format currency
   var formatNumber = d3.format(",");
 
+  // tooltip
+  var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "year: " + d.year;
+  })
+
   // color of bars
   var color = d3.scale.quantize()
       .domain([ d3.min(data, function(d){ return +d.amount }),
@@ -52,7 +60,10 @@
   var gridContainer = chart.append('g')
     .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')');
 
-  // grit label
+  // initialize tooltip
+  chart.call(tip);
+
+  // grit labels on top
   gridContainer.selectAll("text").data(x.ticks(2)).enter().append("text")
     .attr("x", x)
     .attr("dy", -3)
@@ -90,6 +101,7 @@
     .attr('y', y)
     .attr('height', yScale.rangeBand())
     .attr('width', function(d) { return x(barValue(d)); })
+    .attr("class", "bar")
     .attr("fill", function(d) {
     //Get data value
       var value = d.amount;
@@ -101,8 +113,8 @@
           return "#fff";
         };
       })
-    .append("svg:title")
-    .text(function(d) { return "year: " + d.year; });
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide);
 
   // bar value labels
   barsContainer.selectAll("text.bar-value").data(data).enter().append("text")
