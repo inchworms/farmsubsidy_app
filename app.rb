@@ -32,19 +32,19 @@ get '/recipient/:id' do
   erb :recipient
 end
 
-get '/ranked' do
+get '/ranked_per_year_per_payment' do
   @default_year = 2004
   if params[:year]
     @ranked_by_year = PaymentYearTotal.sortbyyear(params[:year])
   else
     @ranked_by_year = PaymentYearTotal.sortbyyear(@default_year)
   end
-  erb :ranked
+  erb :ranked_per_year_per_payment
 end
 
-get '/ranked_total' do
+get '/ranked_all_years_per_payment' do
   @ranked_total = PaymentYearTotal.sortbypayment
-  erb :ranked_total
+  erb :ranked_all_years_per_payment
 end
 
 

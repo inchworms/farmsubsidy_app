@@ -3,12 +3,12 @@
     <form action="/" method="get">
       <fieldset>
         <legend>Farmsubsidy</legend>
-        <a href="ranked">
+        <a href="ranked_per_year_per_payment">
           <span class="glyphicon glyphicon-align-left"></span>
           to the top 10 per year
         </a>
         <p></p>
-        <a href="ranked_total">
+        <a href="ranked_all_years_per_payment">
           <span class="glyphicon glyphicon-align-left"></span>
           to the top 20 total
         </a>
@@ -38,7 +38,7 @@
         </p>
         <h3>All Recipients:</h3>
         <% @recipients.each do | recipient | %>
-          <p><a href="recipient/<%= recipient.id %>"><%= recipient.name %></a></p>
+          <p><a href="recipient/<%= recipient.id %>"><span class="glyphicon glyphicon-user"></span> <%= recipient.name %></a></p>
         <% end %>
     <% else %>                  
       <h3>
