@@ -27,6 +27,10 @@ class Recipient < Sequel::Model
       sum = sum + payment.amount_euro 
     end
   end
+  
+  def year_table
+    # [[2009, '2324'],[2010, '2324,00']]
+  end
 
   # is the same as:
   # def total_payment_amount

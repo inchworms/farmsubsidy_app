@@ -31,9 +31,19 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h3>All Recipients:</h3>
-    <% @recipients.each do | recipient | %>
-      <p><a href="recipient/<%= recipient.id %>"><%= recipient.name %></a></p>
+
+    <% if (@recipients.all.length > 0) %>
+        <p>
+          We found <%= @recipients.all.length %> recipients with your search-term.
+        </p>
+        <h3>All Recipients:</h3>
+        <% @recipients.each do | recipient | %>
+          <p><a href="recipient/<%= recipient.id %>"><%= recipient.name %></a></p>
+        <% end %>
+    <% else %>                  
+      <h3>
+        Please enter a search-term for a list of names including this term.
+      </h3>
     <% end %>
   </div>
 </div>
