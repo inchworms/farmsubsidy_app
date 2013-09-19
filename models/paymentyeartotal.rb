@@ -60,19 +60,30 @@ class PaymentYearTotal < Sequel::Model
     # [#<PaymentYearTotal @values={:id=>1, :amount_euro=... ]
     top_payments = self.limit(limit).all
 
-    top_payments_array = []
+    top_payments_hash = { name: "farmsubsidys",
+                          value: self.total_payments_sum(limit),
+                          children: []}
 
     top_payments.each do |payment|
-      top_payments_array << {name: Recipient.where(id: payment[:recipient_id]).first[:name].gsub("\"", ""),
-                            amount_euro: payment.amount_euro.to_i,
+      top_payments_hash[:children] << 
+                            {name: Recipient.where(id: payment[:recipient_id]).first[:name].gsub("\"", ""),
+                             value: payment.amount_euro.to_i,
                              year: Year.year_for(payment.year_id)
                             }
     end
 
-    p top_payments_array
-    top_payments_array
+    top_payments_hash
+  end
+
+  def self.total_payments_sum(limit)
+    self.limit(limit).all.inject(0.0) do |sum,payment|
+      sum = sum + payment.amount_euro.to_i
+      sum
+    end
   end
 end
+
+
 
 
 

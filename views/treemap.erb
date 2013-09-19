@@ -1,5 +1,20 @@
-<%= @payment_total_treemap_array %>
-
+<%= @payment_total_treemap_array.to_json %>
+<div class="treemap">
 
 <script type="text/javascript" charset="utf-8">
+
+  var dataset = <%= @payment_total_treemap_array.to_json %>
+
+  var w = 500;
+  var h = 500;
+
+  var canvas = d3.select("#treemap").append("svg")
+    .attr("width", w)
+    .attr("height", h);
+
+  var treemap = d3.layout.treemap()
+    .size([w,h])
+    .nodes(dataset)
+
+    console.log(treemap)
 </script>
