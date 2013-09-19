@@ -1,4 +1,4 @@
-// in the erb file we need to assign the javascript variable data
+// in the erb file we need to assign the javascript variable dataset
 // in our case the erb file is called ranked_all_years_per_payment.erb
 // <script type="text/javascript" charset="utf-8">
 //   var data = <%= @@ranked_total %>;
@@ -28,8 +28,8 @@
 
   // color of bars
   var color = d3.scale.quantize()
-      .domain([ d3.min(data, function(d){ return +d.amount }),
-                d3.max(data, function(d){ return +d.amount })])
+      .domain([ d3.min(dataset, function(d){ return +d.amount }),
+                d3.max(dataset, function(d){ return +d.amount })])
       .range(["rgb(173,221,142)","rgb(120,198,121)","rgb(65,171,93)","rgb(35,132,67)","rgb(0,104,55)","rgb(0,69,41)"]);
 
   // accessor functions 
@@ -37,15 +37,15 @@
   var barValue = function(d) { return parseFloat(d['amount']); };
 
   // scales
-  var yScale = d3.scale.ordinal().domain(d3.range(0, data.length)).rangeBands([0, data.length * barHeight ]);
+  var yScale = d3.scale.ordinal().domain(d3.range(0, dataset.length)).rangeBands([0, dataset.length * barHeight ]);
   var y = function(d, i) { return yScale(i) * paddingBetweenBars; };
   var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-  var x = d3.scale.linear().domain([0, d3.max(data, barValue)]).range([0, maxBarWidth]);
+  var x = d3.scale.linear().domain([0, d3.max(dataset, barValue)]).range([0, maxBarWidth]);
 
   // svg container element
   var chart = d3.select('#bar-chart').append("svg")
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-    .attr('height', gridLabelHeight + gridChartOffset + data.length * barHeight * paddingBetweenBars);
+    .attr('height', gridLabelHeight + gridChartOffset + dataset.length * barHeight * paddingBetweenBars);
 
   // initialize the gridContainer
   var gridContainer = chart.append('g')
@@ -75,7 +75,7 @@
     .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset ) + ')');
 
   // bar label text
-  labelsContainer.selectAll('text.bar-label').data(data).enter().append('text')
+  labelsContainer.selectAll('text.bar-label').data(dataset).enter().append('text')
     .attr('y', yText)
     .attr('stroke', 'none')
     .attr("class", 'bar-label')
@@ -88,7 +88,7 @@
     .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')')
 
   // bars
-  barsContainer.selectAll("rect").data(data).enter().append("rect")
+  barsContainer.selectAll("rect").data(dataset).enter().append("rect")
     .attr('y', y)
     .attr('height', yScale.rangeBand())
     .attr('width', function(d) { return x(barValue(d)); })
@@ -108,7 +108,7 @@
     .on('mouseout', tip.hide);
 
   // bar value labels
-  barsContainer.selectAll("text.bar-value").data(data).enter().append("text")
+  barsContainer.selectAll("text.bar-value").data(dataset).enter().append("text")
     .attr("x", function(d) { return x(barValue(d)); })
     .attr("y", yText )
     .attr("dx", 3) // padding-left
