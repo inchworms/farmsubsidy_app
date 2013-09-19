@@ -1,0 +1,51 @@
+var width = 800,
+    height = 600,
+    color = d3.scale.category20c();
+
+var json = {
+    "name": "tags",
+    "children": [
+        {"name":"cooking", "size": 35},
+        {"name":"video games", "size": 31},
+        {"name":"book club", "size": 26},
+        {"name":"knitting", "size": 23},
+        {"name":"hunting", "size": 22},
+        {"name":"farming", "size": 19},
+        {"name":"athletics", "size": 6},
+        {"name":"toys", "size": 3},
+        {"name":"sanitizer", "size": 3},
+        {"name":"pigs", "size": 2},
+        {"name":"ducks", "size": 2},
+        {"name":"wildlife", "size": 2},
+        {"name":"automobiles", "size": 1},
+        {"name":"waterbottles", "size": 1},
+        {"name":"telephone cords", "size": 1},
+        {"name":"lampshade hats", "size": 1}
+    ]
+};
+
+var colors = d3.scale.category20c();
+
+var treemap = d3.layout.treemap()
+    .size([width, height])
+    .sticky(true)
+    .sort(function(a,b) { return a.size - b.size; })
+    .round(true)
+    .value(function(d) { return d.size; });
+
+function cell() {
+    this
+      .style("left", function(d) { return d.x + "px"; })
+      .style("top", function(d) { return d.y + "px"; })
+      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+}
+
+var div = d3.select('.hashtags');
+
+div.data([json]).selectAll('div')
+   .data(treemap.nodes)
+  .enter().append("div")
+   .attr("class", "cell")
+   .call(cell)
+   .text(function(d) { return d.children ? null : d.name; });
