@@ -53,6 +53,25 @@ class PaymentYearTotal < Sequel::Model
     top_payments_sorted_array.to_json
   end
 
+  def self.treemap_array
+    # just for testing purposes
+    limit = 50
+
+    # [#<PaymentYearTotal @values={:id=>1, :amount_euro=... ]
+    top_payments = self.limit(limit).all
+
+    top_payments_array = []
+
+    top_payments.each do |payment|
+      top_payments_array << {name: Recipient.where(id: payment[:recipient_id]).first[:name].gsub("\"", ""),
+                            amount_euro: payment.amount_euro.to_i,
+                             year: Year.year_for(payment.year_id)
+                            }
+    end
+
+    p top_payments_array
+    top_payments_array
+  end
 end
 
 
