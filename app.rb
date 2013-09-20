@@ -51,3 +51,8 @@ get '/treemap' do
   @payment_total_treemap_array = PaymentYearTotal.treemap_array
   erb :treemap
 end
+
+get '/test' do
+  @payment_total_treemap_array = PaymentYearTotal.treemap_array
+  erb :test
+end

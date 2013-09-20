@@ -71,3 +71,17 @@ body {    background-color: #F0EDE8;
   top: 100%;
   left: 0;
 }
+
+.chart {
+  display: block;
+  margin: auto;
+  margin-top: 40px;
+}
+
+text {
+  font-size: 11px;
+}
+
+rect {
+  fill: none;
+}

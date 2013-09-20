@@ -55,13 +55,13 @@ class PaymentYearTotal < Sequel::Model
 
   def self.treemap_array
     # just for testing purposes
-    limit = 50
+    limit = 5
 
     # [#<PaymentYearTotal @values={:id=>1, :amount_euro=... ]
     top_payments = self.limit(limit).all
 
     top_payments_hash = { name: "farmsubsidys",
-                          value: self.total_payments_sum(limit),
+                          # value: self.total_payments_sum(limit),
                           children: []}
 
     top_payments.each do |payment|
