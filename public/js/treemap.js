@@ -1,4 +1,8 @@
+// console.log(treemap[0].children)
+  // [Object, Object, Object]
 
+  // console.log(treemap[1].parent)
+  // max
 var mydata = {
   "name": "Max", "value": 100,
   "children": [
