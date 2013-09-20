@@ -1,34 +1,14 @@
-<div id="treemap"></div>
+<div class="row" >
+  <div class="col-lg-12">
+    <h3 style="text-align:center;background-color:#4D4D4D;color:#F0EDE8;padding-top:3px;padding-bottom:3px">
+      Treemap testing
+    </h3>
+  </div>
+</div>
 
-<script type="text/javascript" charset="utf-8">
+<div class="row" >
+  <div id="treemap" class="col-lg-12"></div>
+</div>
 
-  var dataset = <%= @payment_total_treemap_array.to_json %>
 
-<% p @payment_total_treemap_array %>
-<% p @payment_total_treemap_array.to_json %>
-  var color = d3.scale.category10();
-
-  var canvas = d3.select("#treemap").append("svg")
-    .attr("width", 500)
-   .attr("height", 500);
-
-  var treemap = d3.layout.treemap()
-    .size([500,500])
-    .nodes(dataset);
-
-  var cells = canvas.selectAll(".cell")
-    .data(treemap)
-    .enter()
-    .append("g")
-    .attr("class", "cell");
-
-  cells.append("rect")
-    .attr("x", function (d) { return d.x; })
-    .attr("y", function (d) { return d.y; })
-    .attr("width", function (d) { return d.dx; })
-    .attr("height", function (d) { return d.dy; })
-    .attr("fill", function (d) { return d.children ? null : color(d.parent.name); })
-;
-
-    console.log(treemap)
-</script>
+<script src="/js/treemap.js"></script>
