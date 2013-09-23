@@ -71,3 +71,21 @@ body {    background-color: #F0EDE8;
   top: 100%;
   left: 0;
 }
+
+
+/*treemap*/
+
+form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+}

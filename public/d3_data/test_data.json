@@ -1,0 +1,27 @@
+var mydata = {
+  "name": "Max", "value": 100,
+  "children": [
+  {
+    "name": "Sylvia", "value": 75,
+    "children": [
+    {"name": "Graig", "value": 25},
+    {"name": "Robin", "value": 25},
+    {"name": "Anna", "value": 25}
+    ]
+  },
+  {
+    "name": "David", "value": 75,
+    "children": [
+    {"name": "Jeff", "value": 25},
+    {"name": "Buffy", "value": 25}
+    ]
+  },
+  {
+    "name" : "Mr X", "value": 75,
+    "children": [
+    {"name": "XJeff", "value": 25},
+    {"name": "XBuffy", "value": 25}
+    ]
+  }
+  ]
+};
