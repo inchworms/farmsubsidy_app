@@ -2,7 +2,7 @@
   // [Object, Object, Object]
 
   // console.log(treemap[1].parent)
-  // max
+  // Max
 var mydata = {
   "name": "Max", "value": 100,
   "children": [
