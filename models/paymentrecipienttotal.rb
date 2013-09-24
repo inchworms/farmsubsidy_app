@@ -33,9 +33,11 @@ class PaymentRecipientTotal < Sequel::Model
                              amount_euro: self.total_payments_sum.to_i - self.reverse_order(:amount_euro).limit(limit).sum(:amount_euro).to_i,
                             }
 
-    File.open("public/d3_data/temp.json","w") do |f|
-      f.write(top_payments_hash.to_json)
-    end
+    top_payments_hash
+
+    # File.open("public/d3_data/temp.json","w") do |f|
+    #   f.write(top_payments_hash.to_json)
+    # end
   end
 
   def self.payment_over(amount)
@@ -63,7 +65,7 @@ class PaymentRecipientTotal < Sequel::Model
     #                          amount_euro: self.total_payments_sum.to_i - total_amount
     #                         }
     top_payments_hash[:amount_euro] = total_amount
-    p top_payments_hash
+
     top_payments_hash
   end
 

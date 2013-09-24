@@ -50,7 +50,6 @@ end
 
 
 get '/treemap' do
-  # just for creating the json file in public/d3_data
   erb :treemap
 end
 
