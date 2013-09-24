@@ -55,24 +55,26 @@ class PaymentYearTotal < Sequel::Model
 
   def self.treemap_array
     # just for testing purposes
-    limit = 5
+    limit = 10
 
     # [#<PaymentYearTotal @values={:id=>1, :amount_euro=... ]
     top_payments = self.limit(limit).all
 
     top_payments_hash = { name: "farmsubsidys",
-                          # value: self.total_payments_sum(limit),
+                          amount_euro: self.total_payments_sum(limit),
                           children: []}
 
     top_payments.each do |payment|
       top_payments_hash[:children] << 
                             {name: Recipient.where(id: payment[:recipient_id]).first[:name].gsub("\"", ""),
-                             value: payment.amount_euro.to_i,
+                             amount_euro: payment.amount_euro.to_i,
                              year: Year.year_for(payment.year_id)
                             }
     end
 
-    top_payments_hash
+    File.open("public/d3_data/temp.json","w") do |f|
+      f.write(top_payments_hash.to_json)
+    end
   end
 
   def self.total_payments_sum(limit)

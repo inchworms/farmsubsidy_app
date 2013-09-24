@@ -7,9 +7,9 @@
 
   var treemap = d3.layout.treemap()
     .size([500,500])
-    .value(function(d) { return d.size; });
+    .value(function(d) { return d.amount_euro; });
 
-d3.json("/d3_data/flare.json", function(error, root) {
+d3.json("/d3_data/temp.json", function(error, root) {
   var cells = canvas.datum(root).selectAll(".cell")
     .data(treemap)
     .enter()
@@ -22,14 +22,13 @@ d3.json("/d3_data/flare.json", function(error, root) {
     .attr("y", function(d) { return d.y; })
     .attr("width", function(d) { return d.dx; })
     .attr("height", function(d) { return d.dy; })
-    .attr("fill", function(d) { return d.children ? null : color(d.parent.name); })
+    .attr("fill", function(d) { return color(d.name); })
     .attr("stroke", "#ffffff");
 
   cells.append("text")
     .attr("x", function(d) { return d.x + d.dx/2 })
     .attr("y", function(d) { return d.y + d.dy/2 })
     .attr("text-anchor", "middle")
-    .text(function(d) { return d.children ? null : d.name })
+    .text(function(d) { return d.name })
 
-
-  console.log(treemap)
+});

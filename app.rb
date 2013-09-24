@@ -48,7 +48,7 @@ get '/ranked_all_years_per_payment' do
 end
 
 get '/treemap' do
-  @payment_total_treemap_array = PaymentYearTotal.treemap_array
+  PaymentYearTotal.treemap_array
   erb :treemap
 end
 
