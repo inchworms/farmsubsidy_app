@@ -47,8 +47,10 @@ get '/ranked_all_years_per_payment' do
   erb :ranked_all_years_per_payment
 end
 
+
+
 get '/treemap' do
-  PaymentYearTotal.treemap_array
+  PaymentRecipientTotal.array_for_treemap_highest_payments(20)
   erb :treemap
 end
 
