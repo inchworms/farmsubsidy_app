@@ -1,29 +1,32 @@
 
-  var color = d3.scale.category10();
+var color = d3.scale.category10();
 
-  // tooltip
-  var tip = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function(d) {
-    return d.name + " recieved: " + d.amount_euro;
-  })
+// format currency
+var formatNumber = d3.format(",");
 
-  var canvas = d3.select("#treemap").append("svg")
-    .attr("width", 500)
-    .attr("height", 500);
+// tooltip
+var tip = d3.tip()
+.attr('class', 'd3-tip-treemap')
+.offset([-10, 0])
+.html(function(d) {
+  return d.name + " recieved: " + formatNumber(d.amount_euro) + " Euro";
+})
 
-  // initialize tooltip
-  canvas.call(tip);
+var canvas = d3.select("#treemap").append("svg")
+  .attr("width", 500)
+  .attr("height", 500);
 
-  var treemap = d3.layout.treemap()
-    .size([500,500])
-    .round(true)
-    .value(function(d) { return d.amount_euro; });
+// initialize tooltip
+canvas.call(tip);
 
-  var root_node = canvas.append("g")
-    .attr("class", "cell")
-    .attr("transform", "translate(0.5,0.5)");
+var treemap = d3.layout.treemap()
+  .size([500,500])
+  .round(true)
+  .value(function(d) { return d.amount_euro; });
+
+var root_node = canvas.append("g")
+  .attr("class", "cell")
+  .attr("transform", "translate(0.5,0.5)");
 
 d3.json("/treemap.json", function(error, root) {
   var cells = root_node.datum(root).selectAll(".cell")
@@ -40,11 +43,5 @@ d3.json("/treemap.json", function(error, root) {
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
     .attr("stroke", "#ffffff");
-
-  // cells.append("text")
-  //   .attr("x", function(d) { return d.x + d.dx/2 })
-  //   .attr("y", function(d) { return d.y + d.dy/2 })
-  //   .attr("text-anchor", "middle")
-  //   .text(function(d) { return d.name })
 
 });

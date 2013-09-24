@@ -52,11 +52,10 @@ body {    background-color: #F0EDE8;
   border-radius: 2px;
 }
 
-.d3-tip .treemap {
+.d3-tip-treemap {
   line-height: 1;
-  font-weight: bold;
   padding: 5px;
-  background: black;
+  background: #000;
   color: #fff;
   border-radius: 2px;
 }
