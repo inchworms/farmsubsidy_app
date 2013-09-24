@@ -41,6 +41,8 @@ class PaymentRecipientTotal < Sequel::Model
   end
 
   def self.payment_over(amount)
+    # set default value if amount == nil
+    amount = 1000000 unless amount
 
     # [#<PaymentRecipientTotal @values={:id=>1, :amount_euro=... ]
     top_payments = self.reverse_order(:amount_euro).where('amount_euro >= ?', amount).all

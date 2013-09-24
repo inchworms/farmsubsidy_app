@@ -7,8 +7,16 @@
 </div>
 
 <div class="row" >
-  <div id="treemap" class="col-lg-12"></div>
+  <div id="treemap" class="col-lg-9"></div>
+  <div class="col-lg-3">
+    These <%= @number_of_recipients %> recipients recieved over <%= @min_amount %> Euro.
+
+  </div>
 </div>
 
+
+<script type="text/javascript" charset="utf-8">
+  var jsonPath = "/treemap.json?min=<%= @min_amount %>";
+</script>
 
 <script src="/js/treemap.js"></script>

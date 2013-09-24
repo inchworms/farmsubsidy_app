@@ -28,7 +28,8 @@ var root_node = canvas.append("g")
   .attr("class", "cell")
   .attr("transform", "translate(0.5,0.5)");
 
-d3.json("/treemap.json", function(error, root) {
+
+d3.json(jsonPath, function(error, root) {
   var cells = root_node.datum(root).selectAll(".cell")
     .data(treemap)
     .enter();

@@ -47,9 +47,9 @@ get '/ranked_all_years_per_payment' do
   erb :ranked_all_years_per_payment
 end
 
-
-
 get '/treemap' do
+  @min_amount = params[:min] || 50000000
+  @number_of_recipients = PaymentRecipientTotal.payment_over(@min_amount)[:children].length
   erb :treemap
 end
 
@@ -58,7 +58,7 @@ get '/partition' do
 end
 
 get '/treemap.json' do
-  PaymentRecipientTotal.payment_over(1000000).to_json
+  PaymentRecipientTotal.payment_over(params[:min]).to_json
 end
 
 get '/test' do
