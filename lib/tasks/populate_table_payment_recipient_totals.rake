@@ -1,6 +1,6 @@
 namespace :populate do
-  desc "calculate total payments per year and recipient and populate table"
-  task :total_payments_table do
+  desc "calculate total payments per recipient for all years and populate table"
+  task :payment_recipient_totals do
 
     # connect to an in-memory database
     unless defined?(DB)
@@ -21,29 +21,24 @@ namespace :populate do
     Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
     # connect to payments total table and add data to the database
-    total_payment = DB[:payment_year_totals]
+    payment_recipient_totals = DB[:payment_recipient_totals]
 
     i = 0
 
-    puts "\n\nNow populating the total_payments table."
+    puts "\n\nNow populating the payment_recipient_totals table."
 
     # look trought all recipients and all years and get the total amount
     Recipient.all.each do |recipient|
-      Year.all.each do |year|
-        print "." if i%100 == 0
-        total = recipient.total_payment_amount_per_year(year.year)
-        if total != 0.0
-          total_payment.insert(
-            recipient_id: recipient.id,
-            year_id: year.id,
-            amount_euro: total
-            )
-        end
-      end
+      print "." if i%100 == 0
+      total = recipient.total_payments_by_recipient(recipient.id)
+      payment_recipient_totals.insert(
+        recipient_id: recipient.id,
+        amount_euro: total
+        )
       i += 1
     end
 
-    puts "\nFor calculating total payments the Computer needs #{Time.now - beginning} seconds."
+    puts "\nFor calculating total payments per recipients the Computer needs #{Time.now - beginning} seconds."
   end
 end
 

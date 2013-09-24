@@ -53,7 +53,7 @@ class PaymentYearTotal < Sequel::Model
     top_payments_sorted_array.to_json
   end
 
-  def self.treemap_array
+  def self.treemap_array_20_highest_payments
     # just for testing purposes
     limit = 10
 
