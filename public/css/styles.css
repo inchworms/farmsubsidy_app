@@ -52,6 +52,15 @@ body {    background-color: #F0EDE8;
   border-radius: 2px;
 }
 
+.d3-tip .treemap {
+  line-height: 1;
+  font-weight: bold;
+  padding: 5px;
+  background: black;
+  color: #fff;
+  border-radius: 2px;
+}
+
 /* Creates a small triangle extender for the tooltip */
 .d3-tip:after {
   box-sizing: border-box;
@@ -75,11 +84,7 @@ body {    background-color: #F0EDE8;
 
 /*treemap*/
 
-.node {
-  border: solid 1px white;
-  font: 10px sans-serif;
-  line-height: 12px;
-  overflow: hidden;
-  position: absolute;
-  text-indent: 2px;
+
+.cell {
+  /*shape-rendering: crispEdges;*/
 }

@@ -50,8 +50,16 @@ end
 
 
 get '/treemap' do
-  PaymentRecipientTotal.array_for_treemap_highest_payments(20)
+  # just for creating the json file in public/d3_data
   erb :treemap
+end
+
+get '/partition' do
+  erb :partition
+end
+
+get '/treemap.json' do
+  PaymentRecipientTotal.payment_over(1000000).to_json
 end
 
 get '/test' do
