@@ -1,6 +1,6 @@
 namespace :populate do
   desc "calculate total payments per year and recipient and populate table"
-  task :total_payments_table do
+  task :payment_year_totals_table do
 
     # connect to an in-memory database
     unless defined?(DB)

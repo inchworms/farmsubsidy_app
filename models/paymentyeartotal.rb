@@ -53,9 +53,9 @@ class PaymentYearTotal < Sequel::Model
     top_payments_sorted_array.to_json
   end
 
-  def self.treemap_array_20_highest_payments
+  def self.array_for_treemap_with_20_highest_payments
     # just for testing purposes
-    limit = 10
+    limit = 20
 
     # [#<PaymentYearTotal @values={:id=>1, :amount_euro=... ]
     top_payments = self.limit(limit).all

@@ -39,7 +39,8 @@ task 'prepare_data' do
   Rake::Task['populate:year_table'].invoke
   Rake::Task['populate:recipient_table'].invoke
   Rake::Task['populate:payment_table'].invoke
-  Rake::Task['populate:total_payments_table'].invoke
+  Rake::Task['populate:payment_year_totals_table'].invoke
+  Rake::Task['populate:payment_recipient_totals_table'].invoke
 
   puts "Setting up the complete data took: #{Time.now - beginning} seconds."
 end
