@@ -53,14 +53,18 @@ get '/treemap' do
   erb :treemap
 end
 
-get '/partition' do
-  erb :partition
-end
-
 get '/treemap.json' do
   PaymentRecipientTotal.payment_over(params[:min]).to_json
 end
 
-get '/test' do
-  PaymentRecipientTotal.payment_over_parent(20_000_000)
+get '/payments_grouped' do
+  erb :payments_grouped
+end
+
+get '/payments_grouped.json' do
+  PaymentRecipientTotal.payments_grouped.to_json
+end
+
+get '/partition' do
+  erb :partition
 end
