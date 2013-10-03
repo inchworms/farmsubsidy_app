@@ -73,9 +73,7 @@ class PaymentRecipientTotal < Sequel::Model
 
   def self.payments_grouped
     groups = [
-      # { name: 'under 1 mio', min: 0.0, max: 1.0 },
-      # { name: 'under 2 mio', min: 1.0, max: 2.0 },
-      { name: 'under 5 mio', min: 2.0, max: 5.0 },
+      { name: 'under 5 mio', min: 1.0, max: 5.0 },
       { name: 'under 10 mio', min: 5.0, max: 10.0 },
       { name: 'under 20 mio', min: 10.0, max: 20.0 },
       { name: 'under 50 mio', min: 20.0, max: 50.0 },

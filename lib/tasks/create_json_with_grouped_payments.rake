@@ -11,6 +11,11 @@ namespace :json do
     project_root = tasks_dir.gsub(/lib\/tasks/,"")
     Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
+    # if system("psql -l | grep #{DATABASE_NAME}")
+    #   #if it is then drop the db 
+    #   system("dropdb #{DATABASE_NAME}")
+    # end
+
     PaymentRecipientTotal.payments_grouped
   end
 end
