@@ -1,0 +1,38 @@
+{ "name":"farmsubsidys",
+  "children":[
+  { "name":"million",
+    "children":[
+    {"name":"Ministerstvo zemědělství","amount_euro":75},
+    {"name":"EASTERN SUGAR ČESKÁ REPUBLIKA, a.s.","amount_euro":25},
+    {"name":"MADETA a.s.","amount_euro":25}
+    ]
+  },
+  { "name":"twomillion",
+    "children": [
+    {"name":"Ministerstvo zemědělství","amount_euro":35},
+    {"name":"EASTERN SUGAR ČESKÁ REPUBLIKA, a.s.","amount_euro":10},
+    {"name":"MADETA a.s.","amount_euro":10}
+      ]
+    },
+    { "name":"threemillion",
+    "children": [
+    {"name":"Ministerstvo zemědělství","amount_euro":5},
+    {"name":"EASTERN SUGAR ČESKÁ REPUBLIKA, a.s.","amount_euro":1},
+    {"name":"MADETA a.s.","amount_euro":1},
+    {"name":"MADETA a.s.","amount_euro":6},
+    {"name":"MADETA a.s.","amount_euro":2}
+      ]
+    },
+    { "name":"fourmillion",
+    "children": [
+    {"name":"Ministerstvo zemědělství","amount_euro":13},
+    {"name":"EASTERN SUGAR ČESKÁ REPUBLIKA, a.s.","amount_euro":1},
+    {"name":"MADETA a.s.","amount_euro":15},
+    {"name":"MADETA a.s.","amount_euro":11},
+    {"name":"MADETA a.s.","amount_euro":26},
+    {"name":"MADETA a.s.","amount_euro":24}
+      ]
+    }
+  ]
+}
+

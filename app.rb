@@ -62,6 +62,5 @@ get '/treemap.json' do
 end
 
 get '/test' do
-  @payment_total_treemap_array = PaymentYearTotal.treemap_array
-  erb :test
+  PaymentRecipientTotal.payment_over_parent(20_000_000)
 end
