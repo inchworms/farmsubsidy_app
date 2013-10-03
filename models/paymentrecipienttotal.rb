@@ -35,9 +35,6 @@ class PaymentRecipientTotal < Sequel::Model
 
     top_payments_hash
 
-    # File.open("public/d3_data/temp.json","w") do |f|
-    #   f.write(top_payments_hash.to_json)
-    # end
   end
 
   def self.payment_over(amount)
@@ -76,6 +73,10 @@ class PaymentRecipientTotal < Sequel::Model
 
   def self.payments_grouped
     groups = [
+      # { name: 'under 1 mio', min: 0.0, max: 1.0 },
+      # { name: 'under 2 mio', min: 1.0, max: 2.0 },
+      { name: 'under 5 mio', min: 2.0, max: 5.0 },
+      { name: 'under 10 mio', min: 5.0, max: 10.0 },
       { name: 'under 20 mio', min: 10.0, max: 20.0 },
       { name: 'under 50 mio', min: 20.0, max: 50.0 },
       { name: 'over 50 mio',  min: 50.0, max: 70.0 }
@@ -90,7 +91,9 @@ class PaymentRecipientTotal < Sequel::Model
       grouped_payments_hash[:children] << child_hash
     end
 
-    grouped_payments_hash
+    File.open("public/d3_data/payments_grouped.json","w") do |f|
+      f.write(grouped_payments_hash.to_json)
+    end
   end
 
   def self.total_payments_sum
