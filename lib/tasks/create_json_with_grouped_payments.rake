@@ -11,11 +11,11 @@ namespace :json do
     project_root = tasks_dir.gsub(/lib\/tasks/,"")
     Dir.glob(project_root + "/models/*.rb").each{|f| require f}
 
-    # ruby check is file is present
-    if File.exists?("#{project_root}/public/d3_data/payments_grouped.json")
-      #if it is then drop the file
-      system("rm #{project_root}/public/d3_data/payments_grouped.json")
-    end
+    # # ruby check is file is present
+    # if File.exists?("#{project_root}/public/d3_data/payments_grouped.json")
+    #   #if it is then drop the file
+    #   system("rm #{project_root}/public/d3_data/payments_grouped.json")
+    # end
 
     PaymentRecipientTotal.payments_grouped
   end
