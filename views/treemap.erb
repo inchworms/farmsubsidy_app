@@ -8,8 +8,21 @@
 
 <div class="row" >
   <div id="treemap" class="col-lg-9"></div>
-  <div class="col-lg-3">
-    These <%= @number_of_recipients %> recipients recieved over <%= @min_amount %> Euro.
+    <div class="col-lg-3">
+
+    <form action="/treemap" method="get">
+      <label for="min">
+        Minimum Amount: <input type="number" name="min" min="1000000" max="20000000" step="1000000" value="<%=@min_amount%>">
+      <button class="btn" type="submit">
+        Submit
+      </button>
+      </label>
+    </form>
+
+    
+
+  
+    These <%= @number_of_recipients %> recipients each recieved over <%= @min_amount %> Euro.
 
   </div>
 </div>
