@@ -58,6 +58,7 @@ get '/treemap.json' do
 end
 
 get '/payments_grouped' do
+  @payments_grouped = PaymentRecipientTotal.payments_grouped
   erb :payments_grouped
 end
 
@@ -66,5 +67,6 @@ get '/payments_grouped.json' do
 end
 
 get '/partition' do
+  @number_of_recipients = PaymentRecipientTotal.payment_over(@min_amount)[:children].length
   erb :partition
 end

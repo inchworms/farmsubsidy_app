@@ -29,7 +29,7 @@ var root_node = canvas.append("g")
   .attr("transform", "translate(0.5,0.5)");
 
 
-d3.json("d3_data/payments_grouped.json", function(error, root) {
+d3.json(jsonPath, function(error, root) {
   var cells = root_node.datum(root).selectAll(".cell")
     .data(treemap)
     .enter();

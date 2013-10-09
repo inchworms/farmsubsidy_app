@@ -90,10 +90,12 @@ class PaymentRecipientTotal < Sequel::Model
       grouped_payments_hash[:children] << child_hash
     end
 
-    File.open("public/d3_data/payments_grouped.json","w") do |f|
-      f.write(grouped_payments_hash.to_json)
-    end
+    # File.open("public/d3_data/payments_grouped.json","w") do |f|
+    #   f.write(grouped_payments_hash.to_json)
+    # end
+  grouped_payments_hash
   end
+
 
   def self.total_payments_sum
     self.all.inject(0.0) do |sum,payment|
