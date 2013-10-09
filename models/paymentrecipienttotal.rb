@@ -54,6 +54,7 @@ class PaymentRecipientTotal < Sequel::Model
                        amount_euro: amount,
                       }
     end
+    top_payments_hash
 
   end
 
