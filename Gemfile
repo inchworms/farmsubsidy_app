@@ -4,5 +4,9 @@ gem 'sequel'
 gem 'rake'
 gem 'pg'
 gem 'sinatra-contrib'
-gem 'rspec'
+
+# bundle install --without test"
+group :test do
+  gem 'rspec'
+end
 
