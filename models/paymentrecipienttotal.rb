@@ -35,9 +35,6 @@ class PaymentRecipientTotal < Sequel::Model
 
     top_payments_hash
 
-    # File.open("public/d3_data/temp.json","w") do |f|
-    #   f.write(top_payments_hash.to_json)
-    # end
   end
 
   def self.payment_over(amount)
@@ -50,27 +47,54 @@ class PaymentRecipientTotal < Sequel::Model
     top_payments_hash = { name: "farmsubsidys",
                           children: []}
 
-    total_amount = 0
-
     top_payments.each do |payment|
       amount = payment.amount_euro.to_i
       top_payments_hash[:children] << 
-                            {name: Recipient.where(id: payment[:recipient_id]).
-                                            first[:name],
-                             amount_euro: amount,
-                            }
-      total_amount += amount
+                      {name: Recipient.name_for_id(payment.recipient_id),
+                       amount_euro: amount,
+                      }
     end
-
-    # top_payments_hash[:children] << 
-    #                         {name: "Rest",
-    #                          amount_euro: self.total_payments_sum.to_i - total_amount
-    #                         }
-    top_payments_hash[:amount_euro] = total_amount
-
     top_payments_hash
+
   end
 
+  def self.payments_between(min,max)
+    self.reverse_order(:amount_euro).
+        where('amount_euro >= ?', min).
+        where('amount_euro <  ?', max).
+        all
+  end
+
+  def self.payments_between_as_hash(min,max)
+    self.payments_between(min,max).map do |payment|
+      { name: Recipient.name_for_id(payment.recipient_id),
+        amount_euro: payment.amount_euro.to_i }
+    end
+  end
+
+  def self.payments_grouped
+    groups = [
+      { name: 'under 5 mio', min: 1.0, max: 5.0 },
+      { name: 'under 10 mio', min: 5.0, max: 10.0 },
+      { name: 'under 20 mio', min: 10.0, max: 20.0 },
+      { name: 'under 50 mio', min: 20.0, max: 50.0 },
+      { name: 'over 50 mio',  min: 50.0, max: 70.0 }
+    ]
+
+    grouped_payments_hash = { name: "farmsubsidys",
+                          children: []}
+
+    groups.each do |group|
+      child_hash = { name:     group[:name],
+                     children: self.payments_between_as_hash(group[:min]*1_000_000,group[:max]*1_000_000) }
+      grouped_payments_hash[:children] << child_hash
+    end
+
+    # File.open("public/d3_data/payments_grouped.json","w") do |f|
+    #   f.write(grouped_payments_hash.to_json)
+    # end
+  grouped_payments_hash
+  end
 
 
   def self.total_payments_sum

@@ -41,6 +41,7 @@ task 'prepare_data' do
   Rake::Task['populate:payment_table'].invoke
   Rake::Task['populate:payment_year_totals_table'].invoke
   Rake::Task['populate:payment_recipient_totals_table'].invoke
+  Rake::Task['json:create_json_with_grouped_payments'].invoke
 
   puts "Setting up the complete data took: #{Time.now - beginning} seconds."
 end

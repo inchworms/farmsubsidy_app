@@ -36,4 +36,8 @@ class Recipient < Sequel::Model
     payment_amount_year_array
   end
 
+  def self.name_for_id(id)
+    self.where(id: id).first[:name]
+  end
+
 end
