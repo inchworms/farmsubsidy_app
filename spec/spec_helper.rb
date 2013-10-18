@@ -8,3 +8,4 @@ require "sequel"
 DB = Sequel.postgres("farmsubsidy_development")
 
 require "models/year"
+require "models/payment"
