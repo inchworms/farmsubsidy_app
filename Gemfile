@@ -7,6 +7,7 @@ gem 'sinatra-contrib'
 
 # bundle install --without test"
 group :test do
+  gem 'database_cleaner'
   gem 'rspec'
 end
 
