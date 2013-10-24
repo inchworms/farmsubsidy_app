@@ -1,25 +1,9 @@
 require 'spec_helper'
 require 'database_cleaner'
 
-RSpec.configure do |config|
-
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:transaction)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
-end
 
 describe "test the year methods" do
-  before(:each) do
+  before(:all) do
     db = Sequel.postgres("farmsubsidy_test")
     year = db[:years]
 
@@ -43,4 +27,3 @@ describe "test the year methods" do
     expect(Year.full_range.should eq(Year.first.year..Year.last.year))
   end
 end
-
