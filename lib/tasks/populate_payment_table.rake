@@ -28,7 +28,7 @@ namespace :populate do
     #create a dataset from the recipients table
     recipients = DB[:recipients]
 
-    i = 0
+
     input_file_path = "#{DOCUMENT_ROOT}/data/#{PAYMENTS_FILE_NAME}"
 
     puts "\n\nNow populating the payments table."

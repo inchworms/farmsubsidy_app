@@ -55,7 +55,33 @@ class Database
   def self.populate_payment_table
     db = Sequel.postgres("farmsubsidy_test")
     payment = db[:payments]
+    years = db[:years]
+    recipients = db[:recipients]
 
+    # fetch the data from DB years and create an hash
+    # years.all = [{:id=>1, :year=>2000}, {:id=>2, :year=>2001}, ...]
+     # {2001 => 2, 2002 => 3, 2003 => 4}
+    years_hash = {}
+    years.all.each do |row|
+      years_hash[row[:year].to_s] = row[:id]
+    end
+
+    i = 0
+
+    CSV.foreach("data/cz_payment.txt", col_sep: ";", headers: true, encoding: "UTF-8") do |row|
+      print "." if i%100 == 0
+      # find the recipient_id by searching recipient dataset
+      recipient_id = recipients.where(:global_recipient_id=>row['globalRecipientId']).first[:id]
+      year_id      = years_hash[row['year']]
+      # insert data into payments table
+      payment.insert(
+        amount_euro: row['amountEuro'],
+        year_id: year_id,
+        recipient_id: recipient_id
+      )
+      i += 1
+      break if i > 100
+    end
   end
 end
 
@@ -63,6 +89,7 @@ Database.create
 Database.migrate
 Database.populate_year_table
 Database.populate_recipient_table
+Database.populate_payment_table
 
 require "models/year"
 require "models/recipient"
