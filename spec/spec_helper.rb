@@ -65,4 +65,4 @@ Database.populate_year_table
 Database.populate_recipient_table
 
 require "models/year"
-require "models/payment"
+require "models/recipient"
