@@ -14,7 +14,7 @@ namespace :populate do
     # create a dataset from the payments table
     payment = DB[:payments]
 
-    #create a dataset from the years table
+    # create a dataset from the years table
     years = DB[:years]
 
     # fetch the data from DB years and create an hash

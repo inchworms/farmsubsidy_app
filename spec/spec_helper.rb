@@ -2,6 +2,7 @@
 $LOAD_PATH << "."
 
 require "sequel"
+require 'csv'
 
 Sequel.extension :migration
 
@@ -34,11 +35,34 @@ class Database
       )
     end
   end
+
+  def self.populate_recipient_table
+    db = Sequel.postgres("farmsubsidy_test")
+    recipient = db[:recipients]
+
+    i = 0
+
+    CSV.foreach("data/cz_recipient.txt", col_sep: ";", headers: true, encoding: "UTF-8") do |row|
+      print "." if i%100 == 0
+      recipient.insert(
+        global_recipient_id: row['globalRecipientId'],
+        zipcode: row['zipcode'],
+        name: row['name'])
+      i += 1
+    end
+  end
+
+  def self.populate_payment_table
+    db = Sequel.postgres("farmsubsidy_test")
+    payment = db[:payments]
+
+  end
 end
 
 Database.create
 Database.migrate
 Database.populate_year_table
+Database.populate_recipient_table
 
 require "models/year"
 require "models/payment"
