@@ -49,6 +49,7 @@ class Database
         zipcode: row['zipcode'],
         name: row['name'])
       i += 1
+      break if i > 10
     end
   end
 
@@ -69,16 +70,19 @@ class Database
     i = 0
 
     CSV.foreach("data/cz_payment.txt", col_sep: ";", headers: true, encoding: "UTF-8") do |row|
-      print "." if i%100 == 0
-      # find the recipient_id by searching recipient dataset
-      recipient_id = recipients.where(:global_recipient_id=>row['globalRecipientId']).first[:id]
-      year_id      = years_hash[row['year']]
-      # insert data into payments table
-      payment.insert(
-        amount_euro: row['amountEuro'],
-        year_id: year_id,
-        recipient_id: recipient_id
-      )
+
+      recipients.all.each do |recipient|
+        if recipient[:global_recipient_id] == row['globalRecipientId']
+          recipient_id = recipients.where(:global_recipient_id=>row['globalRecipientId']).first[:id]
+          year_id      = years_hash[row['year']]
+          payment.insert(
+            amount_euro: row['amountEuro'],
+            year_id: year_id,
+            recipient_id: recipient_id
+          )
+          p "#{row['amountEuro']}"
+        end
+      end
       i += 1
       break if i > 100
     end
