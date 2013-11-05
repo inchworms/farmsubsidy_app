@@ -6,7 +6,7 @@ class Recipient < Sequel::Model
     # find payments by recipient
     recipient_payments = Payment.where(recipient_id: recipient_id)
 
-    #add the payments together
+    # add the payments together
     recipient_payments.inject(0.0) do |sum, payment|
       sum = sum + payment.amount_euro
     end

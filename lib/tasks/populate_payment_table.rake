@@ -14,7 +14,7 @@ namespace :populate do
     # create a dataset from the payments table
     payment = DB[:payments]
 
-    #create a dataset from the years table
+    # create a dataset from the years table
     years = DB[:years]
 
     # fetch the data from DB years and create an hash
@@ -28,7 +28,7 @@ namespace :populate do
     #create a dataset from the recipients table
     recipients = DB[:recipients]
 
-    i = 0
+
     input_file_path = "#{DOCUMENT_ROOT}/data/#{PAYMENTS_FILE_NAME}"
 
     puts "\n\nNow populating the payments table."

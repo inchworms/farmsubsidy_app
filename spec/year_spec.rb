@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'database_cleaner'
+
 
 describe "test the year methods" do
+
   it "find the year_id for the year" do
     expect(Year.id_for(2004)).to eq(1)
   end
