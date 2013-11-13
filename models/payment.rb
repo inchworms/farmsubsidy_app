@@ -15,7 +15,7 @@ class Payment < Sequel::Model
           limit(limit).
           all
   end
-  
+
   def date
     self.year.year
   end

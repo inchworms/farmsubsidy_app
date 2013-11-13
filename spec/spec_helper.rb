@@ -80,7 +80,6 @@ class Database
             year_id: year_id,
             recipient_id: recipient_id
           )
-          p "#{row['amountEuro']}"
         end
       end
       i += 1
@@ -97,3 +96,4 @@ Database.populate_payment_table
 
 require "models/year"
 require "models/recipient"
+require "models/payment"
